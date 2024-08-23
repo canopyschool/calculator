@@ -6,13 +6,20 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #FAFAFA;
+    position: relative;
 }
 
-
 .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+}
+
+.calculator {
     text-align: center;
-    width: 800px; /* Fixed width */
-    height: 600px; /* Fixed height */
+    width: 800px;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -21,6 +28,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    height: 100%;
+    z-index: 20;
+    
 }
 
 #display {
@@ -63,19 +73,14 @@ body {
 
 .tab-button.active {
     background-color: #ddd;
-    border-bottom: 3px solid #02b80f;
+    outline: 1px solid #02b80f; /* Use outline instead of border to avoid affecting layout */
+    outline-offset: -1px; /* Adjust offset to visually align with the original border position */
 }
 
 .button-group {
-    display: none;
+    display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    flex-grow: 1; /* Allow the button group to grow to fill available space */
-    justify-content: space-between;
-}
-
-.button-group.active {
-    display: flex;
     justify-content: space-between;
 }
 
@@ -88,6 +93,11 @@ button {
     cursor: pointer;
     width: calc(25% - 10px);
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
 }
 
 button:active {
@@ -98,13 +108,151 @@ button:active {
     background-color: #ff5959; /* Red */
     color: white;
 }
+
 button:hover {
     opacity: 0.7;
 }
+
 button:active {
     transform: scale(0.95); /* Slightly shrink the button when clicked */
 }
-#add-button, #subtract-button,#multiply-button, #divide-button  {
-    background-color: #005ec9; /* blue */
+
+#add-button, #subtract-button, #multiply-button, #divide-button {
+    background-color: #005ec9; /* Blue */
     color: white;
+}
+
+/* Add !important to enforce the styles */
+.tab-button.active#askava-button {
+    background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
+    color: rgba(0, 0, 255, 0.819);
+    outline: 1px solid #6302b88c;
+    outline-offset: -1px; /* Reset the offset if needed */
+}
+
+/* You can also add hover and active states for Ask Ava */
+#askava-button:hover {
+    background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
+    color: blue;
+}
+
+#askava-button:active {
+    background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
+    outline: 1px solid #6302b8;
+    outline-offset: -1px;
+}
+
+
+
+
+.functions-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    background-color: #ffffff; /* Base background color */
+    background-image: radial-gradient(#d2dadf 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the spacing between dots */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    min-width: 300px;
+    height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    right: 0; /* Start off-screen to the right */
+    transition: right 0.5s ease; /* Smooth sliding transition */
+    
+}
+
+.functions-panel.active {
+    right: -310px; /* Slide into view when active */
+}
+
+
+/* Extra panel that appears on the left */
+.extra-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    background-color: #ffffff; /* Base background color */
+    background-image: radial-gradient(#d2dadf 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the spacing between dots */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    min-width: 400px;
+    height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 0.5s ease;
+}
+
+.extra-panel.active {
+    left: -410px; /* Rotate panel back into view */
+}
+
+
+.search-bar-container {
+    width: 100%; /* Make the container take up full width */
+    display: flex;
+    justify-content: center; /* Center the search bar horizontally */
+    align-items: center; /* Center the search bar vertically */
+    height: 100%;
+    min-width: 360px;
+    border: none;
+    /* Take up the full height of the extra panel */
+}
+
+.search-bar {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
+    background-size: 200% 100%; /* Double the size to allow the gradient to move */
+    border-radius: 25px;
+    width: calc(100%); /* Take full width minus padding (20px on each side) */
+    box-sizing: border-box;
+    outline: 1px solid #65656548;
+    animation: shimmerBackground 4s linear infinite;
+}
+
+
+@keyframes shimmerBackground {
+    0% {
+        background-position: 200% 0%;
+    }
+    100% {
+        background-position: -200% 0%;
+    }
+}
+
+
+
+.search-input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 13px;
+    width: 100%;
+    color: #454545af; /* Text color */
+    box-sizing: border-box;
+}
+.search-input::placeholder {
+    color: #454545af; /* Replace with your desired color */
+    opacity: 1;
+}
+.voiceflow-iframe {
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    border: none; /* Remove iframe border */
+    overflow: hidden;
 }

@@ -1,0 +1,79 @@
+/* Change the background color of the entire chat widget */
+.vfrc-chat--dialog {
+    background-color: #ffffff  !important;
+}
+.vfrc-header.c-iCDrnV {
+display: none;}
+
+.vfrc-message--chat.c-PJLV-gJqBfM-from-user {
+    background-color: #1ea5a91c !important;
+    color: var(--colors-black) !important;
+    white-space: break-spaces !important;
+}
+.vfrc-message--chat.c-PJLV-jueArD-from-system {
+     background-color: #06c40a3d !important;
+     color: var(--colors-black) !important;
+     white-space: break-spaces !important;
+}
+
+.vfrc-widget--chat {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.vfrc-chat--dialog {
+    width: 100% !important;
+    height: 100% !important;
+      background-color: #ffffff; /* Base background color */
+    background-image: radial-gradient(#d2dadf 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the spacing between dots */
+}
+.c-kbCYVp {
+    border-radius: 0 !important; /* Turn off border radius */
+}
+.c-ealvbK {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+  background-color: var(--colors-black); 
+}
+.c-eLmjZC {
+    display: -webkit-box;
+    margin: 0px;
+    font-family: var(--fonts-default);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--colors-black);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+.c-iCDrnV {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: var(--sizes-lg);
+    padding: 0 var(--space-4) 0 var(--space-5);
+    background-color: var(--colors-primary);
+    box-shadow: 0 0px 0px var(--shadows-shadow16);
+}
+.c-dxAZjf .c-dhzjXW {
+    height: var(--sizes-xxs);
+    width: var(--sizes-xxs);
+    color: rgb(33 16 12 / 0%);
+    transition: color 150ms ease 0s;
+}
+.vfrc-footer{
+      background-color: #ffffff; /* Base background color */
+    background-image: radial-gradient(#d2dadf 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the spacing between dots */
+}
+.vfrc-timestamp{
+    display:none;
+}
+.vfrc-widget--launcher{
+    display:none;
+}

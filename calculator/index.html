@@ -8,54 +8,77 @@
 </head>
 <body>
     <div class="container">
-        <input type="text" id="display" disabled placeholder="ax² + bx + c = 0">
-        <button id="solve-button" class="solve-button">Solve</button>
+        <div id="extrapanel" class="extra-panel">
+            <div class="content-container">
+                <!-- Iframe taking place of the search bar container -->
+                <iframe id="voiceflow-iframe" class="search-bar-container" src="about:blank"></iframe>
+            </div>
+        </div>
+  
+        <div class="calculator">
+            <input type="text" id="display" disabled placeholder="ax² + bx + c = 0">
+            <button id="solve-button" class="solve-button">Solve</button>
 
-        <!-- Tabs for settings -->
-        <div class="tab-selector">
-            <button class="tab-button active" onclick="switchTab('basic')">Basic</button>
-            <button class="tab-button" onclick="switchTab('functions')">Functions</button>
-        </div>
+            <!-- Tabs for settings -->
+            <div class="tab-selector">
+                <button id="askava-button" class="tab-button" onclick="switchTab('extrapanel')">Ask Ava ✶</button>
+                <button id="basic-button" class="tab-button active" onclick="switchTab('basic')">Basic</button>
+                <button id="functions-button" class="tab-button" onclick="switchTab('functions')">Functions</button>
+            </div>
+            
 
-        <div id="basic" class="button-group active">
-            <button id="seven-button">7</button>
-            <button id="eight-button">8</button>
-            <button id="nine-button">9</button>
-            <button id="add-button">+</button>
-            
-            <button id="four-button">4</button>
-            <button id="five-button">5</button>
-            <button id="six-button">6</button>
-            <button id="subtract-button">-</button>
-            
-            <button id="one-button">1</button>
-            <button id="two-button">2</button>
-            <button id="three-button">3</button>
-            <button id="multiply-button">x</button>
-            
-            <button id="zero-button">0</button>
-            <button id="decimal-button">.</button>
-            <button id="m-clear">MC</button>
-            
-            <button id="divide-button">/</button>
-            
-            <button id="m-plus">M+</button>
-            <button id="m-minus">M-</button>
-            <button id="m-recall">MR</button>
-            <button id="basicclear">C</button>
-            
+            <div id="basic" class="button-group active">
+                <button id="seven-button">7</button>
+                <button id="eight-button">8</button>
+                <button id="nine-button">9</button>
+                <button id="add-button">+</button>
+
+                <button id="four-button">4</button>
+                <button id="five-button">5</button>
+                <button id="six-button">6</button>
+                <button id="subtract-button">-</button>
+
+                <button id="one-button">1</button>
+                <button id="two-button">2</button>
+                <button id="three-button">3</button>
+                <button id="multiply-button">x</button>
+
+                <button id="zero-button">0</button>
+                <button id="decimal-button">.</button>
+                <button id="m-clear">MC</button>
+                <button id="divide-button">/</button>
+
+                <button id="m-plus">M+</button>
+                <button id="m-minus">M-</button>
+                <button id="m-recall">MR</button>
+                <button id="basicclear">C</button>
+            </div>
         </div>
         
-        
-        <div id="functions" class="button-group">
-            <button id="square-button">x²</button><button id="cube-button">x³</button><button id="sqrt-button">√x</button><button id="cbrt-button">cbrt</button>
-            <button id="ten-power-x-button">10^x</button><button id="pi-button">π</button><button id="e-button">e</button><button id="factorial-button">x!</button>
-            <button id="sin-button">sin</button><button id="cos-button">cos</button><button id="tan-button">tan</button><button id="sinh-button">sinh</button>
-            <button id="cosh-button">cosh</button><button id="tanh-button">tanh</button><button id="asin-button">asin</button><button id="acos-button">acos</button>
-            <button id="atan-button">atan</button><button id="log-button">log</button><button id="ln-button">ln</button><button id="open-paren-button">(</button>
-            <button id="close-paren-button">)</button><button id="clear-button">C</button>
+        <div id="functions" class="functions-panel">
+            <button id="square-button">x²</button>
+            <button id="cube-button">x³</button>
+            <button id="sqrt-button">√x</button>
+            <button id="cbrt-button">cbrt</button>
+            <button id="ten-power-x-button">10^x</button>
+            <button id="pi-button">π</button>
+            <button id="e-button">e</button>
+            <button id="factorial-button">x!</button>
+            <button id="sin-button">sin</button>
+            <button id="cos-button">cos</button>
+            <button id="tan-button">tan</button>
+            <button id="sinh-button">sinh</button>
+            <button id="cosh-button">cosh</button>
+            <button id="tanh-button">tanh</button>
+            <button id="asin-button">asin</button>
+            <button id="acos-button">acos</button>
+            <button id="atan-button">atan</button>
+            <button id="log-button">log</button>
+            <button id="ln-button">ln</button>
+            <button id="open-paren-button">(</button>
+            <button id="close-paren-button">)</button>
         </div>
-        
+    </div>
 
     <script src="script.js"></script>
 </body>

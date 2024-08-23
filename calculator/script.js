@@ -1,5 +1,8 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('button');
+const functionsGroup = document.getElementById('functions'); // Reference to the functions group
+const basicGroup = document.getElementById('basic'); // Reference to the basic group
+const extraPanel = document.getElementById('extrapanel'); // Reference to the new extra panel
 
 let memoryValue = 0; // Memory value initialization
 
@@ -174,36 +177,97 @@ function factorial(n) {
 }
 
 function switchTab(tabName) {
-    // Hide all button groups
-    const buttonGroups = document.querySelectorAll('.button-group');
-    buttonGroups.forEach(group => group.classList.remove('active'));
+    const basicButton = document.getElementById('basic-button');
+    const functionsButton = document.getElementById('functions-button');
+    const askAvaButton = document.getElementById('askava-button');
 
-    // Show the selected button group
-    document.getElementById(tabName).classList.add('active');
+    // Handle the "Basic" and "Functions" tab logic
+    if (tabName === 'basic') {
+        functionsButton.classList.remove('active');
+        basicButton.classList.add('active');
+        basicGroup.classList.add('active');
+        functionsGroup.classList.remove('active');
+    } else if (tabName === 'functions') {
+        basicButton.classList.remove('active');
+        functionsButton.classList.add('active');
+        basicGroup.classList.remove('active');
+        functionsGroup.classList.add('active');
+    }
 
-    // Remove 'active' class from all tabs and add it to the selected tab
-    const tabButtons = document.querySelectorAll('.tab-button');
-    tabButtons.forEach(button => button.classList.remove('active'));
-    event.target.classList.add('active');
+    // Handle the "Ask Ava" button independently
+    if (tabName === 'extrapanel') {
+        if (extraPanel.classList.contains('active')) {
+            extraPanel.classList.remove('active');
+            askAvaButton.classList.remove('active');
+        } else {
+            extraPanel.classList.add('active');
+            askAvaButton.classList.add('active');
+        }
+    }
 }
+
+
 
 // Set up default tab
 document.addEventListener('DOMContentLoaded', function() {
     switchTab('basic');
 });
 
-// Event listener to handle keyboard input
 document.addEventListener('keydown', function(event) {
     const key = event.key;
+    const activeElement = document.activeElement;
 
+    // Check if the active element is the search bar input
+    if (activeElement && activeElement.tagName.toLowerCase() === 'input' && activeElement.classList.contains('search-input')) {
+        return; // Don't trigger calculator functions if typing in the search bar
+    }
+
+    // Handle the backspace key
     if (key === 'Backspace') {
-        // Handle the backspace key by removing the last character
         display.value = display.value.slice(0, -1);
-    } else if (key === 'Enter') { // Handle the Enter key
-        event.preventDefault(); // Prevent the default action that might cause the issue
+    } else if (key === 'Enter') {
+        event.preventDefault(); // Prevent the default action that might cause issues
         solveExpression(); // Trigger the solve function
     } else if (!isNaN(key) || ['+', '-', '*', '/', '.', '(', ')'].includes(key)) {
         event.preventDefault(); // Prevent the key from being added again
         handleInput(key);
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const iframe = document.getElementById('voiceflow-iframe');
+
+    if (iframe) {
+        const iframeDoc = iframe.contentWindow.document;
+        const script = iframeDoc.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://cdn.voiceflow.com/widget/bundle.mjs';
+
+        script.onload = function() {
+            // Load the Voiceflow chat widget
+            iframe.contentWindow.voiceflow.chat.load({
+                verify: { projectID: '66c901330e51083b58d558d1' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production',
+                assistant: { stylesheet: "https://naxosdigitals.github.io/stylesheets/calculatorstyles.css" }
+            }).then(() => {
+                // Add a small timeout and then auto-open the widget
+                setTimeout(() => {
+                    iframe.contentWindow.voiceflow.chat.open();
+                    addMessageListener();
+                }, 500); // Adjust the timeout duration as needed
+            }).catch(error => {
+                console.error('Error opening Voiceflow chat:', error);
+            });
+        };
+
+        // Append the script to the iframe document
+        iframeDoc.body.appendChild(script);
+    }
+});
+
+function addMessageListener() {
+    // This function can be used to add any event listeners or handle messages
+    console.log('Voiceflow chat is open and ready.');
+}
+
+
