@@ -213,7 +213,7 @@ window.addEventListener('resize', handleResize);
 
 function switchTab(tabName) {
     const screenWidth = window.innerWidth;
-    const thresholdWidth = 1100; // Match the same threshold used in the resize function
+    const thresholdWidth = 1300; // Match the same threshold used in the resize function
 
     // Handle the functions panel and basic group independently
     if (tabName === 'functions') {
@@ -257,23 +257,47 @@ function switchTab(tabName) {
 
 // Call handleResize once on load to check the initial state
 window.addEventListener('load', handleResize);
+window.addEventListener('resize', handleResize);
 
 function handleResize() {
     const screenWidth = window.innerWidth;
 
-    // Set the threshold width at which only one panel can be open at a time
-    const thresholdWidth = 1100; // You can adjust this value based on your needs
+    // Set the threshold width for mobile devices
+    const mobileThresholdWidth = 768; // Threshold for mobile devices
 
-    const functionsActive = functionsGroup.classList.contains('active');
-    const extraActive = extraPanel.classList.contains('active');
+    const calculator = document.querySelector('.calculator');
+    const mobileMessage = document.querySelector('.mobile-message');
+    const mobileOverlay = document.querySelector('.mobile-message-overlay');
 
-    if (screenWidth < thresholdWidth && functionsActive && extraActive) {
-        // If both panels are open on a small screen, close one of them
-        functionsGroup.classList.remove('active');
-        document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
-        adjustCalculatorPosition();
+    if (screenWidth <= mobileThresholdWidth) {
+        // Hide the calculator and show the mobile message and overlay
+        calculator.style.display = 'none';
+        if (!mobileMessage) {
+            // Create and display the mobile message overlay
+            const messageOverlay = document.createElement('div');
+            messageOverlay.className = 'mobile-message';
+            messageOverlay.innerText = 'We are currently building a mobile application. Please visit us on a larger screen for now!';
+            document.body.appendChild(messageOverlay);
+
+            // Create and display the background overlay
+            const backgroundOverlay = document.createElement('div');
+            backgroundOverlay.className = 'mobile-message-overlay';
+            document.body.appendChild(backgroundOverlay);
+        }
+    } else {
+        // Show the calculator and hide the mobile message and overlay
+        calculator.style.display = 'block';
+        if (mobileMessage) {
+            mobileMessage.remove();
+        }
+        if (mobileOverlay) {
+            mobileOverlay.remove();
+        }
     }
 }
+
+
+
 
 
 
