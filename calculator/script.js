@@ -188,10 +188,10 @@ function adjustCalculatorPosition() {
 
     if (functionsActive && extraActive) {
         // If both panels are open, calculate the shift to keep the calculator centered
-        totalShift = -(extraPanelWidth - functionPanelWidth) / 2;
+        totalShift = -("200" - functionPanelWidth) / 2;
         calculator.style.width = '550px'; // Set width to 600px when either panel is open
     } else if (functionsActive) {
-        // If only the functions panel is open, shift the calculator to the left
+        // If only the functions panel is open, shift the calcu4lator to the left
         totalShift = -(functionPanelWidth / 2);
         calculator.style.width = '550px'; // Set width to 600px when either panel is open
     } else if (extraActive) {
