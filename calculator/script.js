@@ -7,7 +7,7 @@ const extraPanel = document.getElementById('extrapanel'); // Reference to the ne
 let memoryValue = 0; // Memory value initialization
 
 buttons.forEach(button => {
-    const handleButtonPress = (event) => {
+    button.addEventListener('click', (event) => {
         const buttonText = button.textContent;
 
         // Check if the clicked button is a tab button
@@ -16,13 +16,8 @@ buttons.forEach(button => {
         }
 
         handleInput(buttonText);
-    };
-
-    // Add both click and touchend event listeners
-    button.addEventListener('click', handleButtonPress);
-    button.addEventListener('touchend', handleButtonPress);
+    });
 });
-
 
 function handleInput(input) {
     if (input === '=' || input === 'Solve') {
@@ -218,7 +213,7 @@ window.addEventListener('resize', handleResize);
 
 function switchTab(tabName) {
     const screenWidth = window.innerWidth;
-    const thresholdWidth = 1100; // Match the same threshold used in the resize function
+    const thresholdWidth = 1300; // Match the same threshold used in the resize function
 
     // Handle the functions panel and basic group independently
     if (tabName === 'functions') {
