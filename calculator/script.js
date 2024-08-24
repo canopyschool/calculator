@@ -175,36 +175,71 @@ function factorial(n) {
     if (n === 0 || n === 1) return 1;
     return n * factorial(n - 1);
 }
+function adjustCalculatorPosition() {
+    const container = document.querySelector('.container');
+    const calculator = document.querySelector('.calculator');
+    const functionsActive = functionsGroup.classList.contains('active');
+    const extraActive = extraPanel.classList.contains('active');
+
+    const extraPanelWidth = 400; // Width of the extra panel
+    const functionPanelWidth = 300; // Width of the functions panel
+    const screenWidth = window.innerWidth; // Width of the screen
+
+    let totalShift = 0;
+
+    if (functionsActive && extraActive) {
+        // If both panels are open, calculate the shift to keep the calculator centered
+        totalShift = -("200" - functionPanelWidth) / 2;
+    } else if (functionsActive) {
+        // If only the functions panel is open, shift the calculator to the left
+        totalShift = -(functionPanelWidth / 2);
+    } else if (extraActive) {
+        // If only the extra panel is open, shift the calculator to the right
+        totalShift = extraPanelWidth / 2;
+    } else {
+        totalShift = 0; // Center the calculator when neither are open
+    }
+
+    // Apply the calculated shift to the container
+    container.style.transform = `translateX(${totalShift}px)`;
+}
 
 function switchTab(tabName) {
-    const basicButton = document.getElementById('basic-button');
-    const functionsButton = document.getElementById('functions-button');
-    const askAvaButton = document.getElementById('askava-button');
-
-    // Handle the "Basic" and "Functions" tab logic
-    if (tabName === 'basic') {
-        functionsButton.classList.remove('active');
-        basicButton.classList.add('active');
-        basicGroup.classList.add('active');
-        functionsGroup.classList.remove('active');
-    } else if (tabName === 'functions') {
-        basicButton.classList.remove('active');
-        functionsButton.classList.add('active');
-        basicGroup.classList.remove('active');
-        functionsGroup.classList.add('active');
-    }
-
-    // Handle the "Ask Ava" button independently
-    if (tabName === 'extrapanel') {
-        if (extraPanel.classList.contains('active')) {
-            extraPanel.classList.remove('active');
-            askAvaButton.classList.remove('active');
+    // Handle the functions panel and basic group independently
+    if (tabName === 'functions') {
+        if (functionsGroup.classList.contains('active')) {
+            functionsGroup.classList.remove('active');
+            document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
+            document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.add('active');
         } else {
-            extraPanel.classList.add('active');
-            askAvaButton.classList.add('active');
+            functionsGroup.classList.add('active');
+            document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.add('active');
+            document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.remove('active');
         }
+    } else if (tabName === 'basic') {
+        functionsGroup.classList.remove('active');
+        document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.add('active');
+        document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
+    } else if (tabName === 'extrapanel') {
+        // Toggle the extra panel's visibility independently
+        extraPanel.classList.toggle('active');
+        const askAvaButton = document.querySelector('button[onclick="switchTab(\'extrapanel\')"]');
+        askAvaButton.classList.toggle('active');
     }
+
+    // Ensure only one of the Basic or Functions tabs is highlighted
+    if (!functionsGroup.classList.contains('active') && !extraPanel.classList.contains('active')) {
+        document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.add('active');
+        document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
+    } else if (functionsGroup.classList.contains('active')) {
+        document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.remove('active');
+    }
+
+    adjustCalculatorPosition(); // Adjust the calculator's position after toggling
 }
+
+
+
 
 
 
@@ -267,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addMessageListener() {
     // This function can be used to add any event listeners or handle messages
-    console.log('Voiceflow chat is open and ready.');
+    //console.log('Voiceflow chat is open and ready.');
 }
 
 

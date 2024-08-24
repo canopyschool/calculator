@@ -6,14 +6,16 @@
 display: none;}
 
 .vfrc-message--chat.c-PJLV-gJqBfM-from-user {
-    background-color: #1ea5a91c !important;
+    background-color: #07b811e0 !important;
     color: var(--colors-black) !important;
     white-space: break-spaces !important;
+    
 }
 .vfrc-message--chat.c-PJLV-jueArD-from-system {
-     background-color: #06c40a3d !important;
-     color: var(--colors-black) !important;
-     white-space: break-spaces !important;
+     background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
+     outline: 1px solid #cfa9e5;
+     color: #0000ffe0 !important;
+     white-space:break-spaces !important;
 }
 
 .vfrc-widget--chat {
@@ -71,9 +73,15 @@ display: none;}
     background-image: radial-gradient(#d2dadf 1px, transparent 1px);
     background-size: 20px 20px; /* Adjust the spacing between dots */
 }
+.vfrc-widget--launcher{
+    display:none;
+}
 .vfrc-timestamp{
     display:none;
 }
-.vfrc-widget--launcher{
+.vfrc-assistant-info{
     display:none;
+}
+.vfrc-button{
+    background: linear-gradient(90deg, #70b0f019, #6710f21d, #70b0f01c);
 }
