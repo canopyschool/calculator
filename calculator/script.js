@@ -7,7 +7,7 @@ const extraPanel = document.getElementById('extrapanel'); // Reference to the ne
 let memoryValue = 0; // Memory value initialization
 
 buttons.forEach(button => {
-    button.addEventListener('click', (event) => {
+    const handleButtonPress = (event) => {
         const buttonText = button.textContent;
 
         // Check if the clicked button is a tab button
@@ -16,8 +16,13 @@ buttons.forEach(button => {
         }
 
         handleInput(buttonText);
-    });
+    };
+
+    // Add both click and touchend event listeners
+    button.addEventListener('click', handleButtonPress);
+    button.addEventListener('touchend', handleButtonPress);
 });
+
 
 function handleInput(input) {
     if (input === '=' || input === 'Solve') {
