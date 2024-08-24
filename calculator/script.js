@@ -181,7 +181,7 @@ function adjustCalculatorPosition() {
     const functionsActive = functionsGroup.classList.contains('active');
     const extraActive = extraPanel.classList.contains('active');
 
-    const extraPanelWidth = 400; // Width of the extra panel
+    const extraPanelWidth = 200; // Width of the extra panel
     const functionPanelWidth = 300; // Width of the functions panel
     const screenWidth = window.innerWidth; // Width of the screen
 
@@ -189,20 +189,25 @@ function adjustCalculatorPosition() {
 
     if (functionsActive && extraActive) {
         // If both panels are open, calculate the shift to keep the calculator centered
-        totalShift = -("200" - functionPanelWidth) / 2;
+        totalShift = -(extraPanelWidth - functionPanelWidth) / 2;
+        calculator.style.width = '600px'; // Set width to 600px when either panel is open
     } else if (functionsActive) {
         // If only the functions panel is open, shift the calculator to the left
         totalShift = -(functionPanelWidth / 2);
+        calculator.style.width = '600px'; // Set width to 600px when either panel is open
     } else if (extraActive) {
         // If only the extra panel is open, shift the calculator to the right
         totalShift = extraPanelWidth / 2;
+        calculator.style.width = '600px'; // Set width to 600px when either panel is open
     } else {
         totalShift = 0; // Center the calculator when neither are open
+        calculator.style.width = '900px'; // Reset width to default when no panel is open
     }
 
     // Apply the calculated shift to the container
     container.style.transform = `translateX(${totalShift}px)`;
 }
+
 
 function switchTab(tabName) {
     // Handle the functions panel and basic group independently

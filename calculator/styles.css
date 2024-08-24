@@ -20,7 +20,7 @@ body {
 
 .calculator {
     text-align: center;
-    width: 600px;
+    width: 900px; /* Default width when no panel is open */
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -33,6 +33,11 @@ body {
     z-index: 20;
     transition: all 0.5s ease;
 }
+
+.calculator.panel-open {
+    width: 600px; /* Width when any panel is open */
+}
+
 
 #display {
     width: 100%;
