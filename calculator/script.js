@@ -181,24 +181,23 @@ function adjustCalculatorPosition() {
     const functionsActive = functionsGroup.classList.contains('active');
     const extraActive = extraPanel.classList.contains('active');
 
-    const extraPanelWidth = 200; // Width of the extra panel
-    const functionPanelWidth = 300; // Width of the functions panel
-    const screenWidth = window.innerWidth; // Width of the screen
+    const extraPanelWidth = 420; // Correct width of the extra panel
+    const functionPanelWidth = 300; // Correct width of the functions panel
 
     let totalShift = 0;
 
     if (functionsActive && extraActive) {
         // If both panels are open, calculate the shift to keep the calculator centered
         totalShift = -(extraPanelWidth - functionPanelWidth) / 2;
-        calculator.style.width = '600px'; // Set width to 600px when either panel is open
+        calculator.style.width = '550px'; // Set width to 600px when either panel is open
     } else if (functionsActive) {
         // If only the functions panel is open, shift the calculator to the left
         totalShift = -(functionPanelWidth / 2);
-        calculator.style.width = '600px'; // Set width to 600px when either panel is open
+        calculator.style.width = '550px'; // Set width to 600px when either panel is open
     } else if (extraActive) {
         // If only the extra panel is open, shift the calculator to the right
         totalShift = extraPanelWidth / 2;
-        calculator.style.width = '600px'; // Set width to 600px when either panel is open
+        calculator.style.width = '550px'; // Set width to 600px when either panel is open
     } else {
         totalShift = 0; // Center the calculator when neither are open
         calculator.style.width = '900px'; // Reset width to default when no panel is open
@@ -209,9 +208,19 @@ function adjustCalculatorPosition() {
 }
 
 
+
+window.addEventListener('resize', handleResize);
+
 function switchTab(tabName) {
+    const screenWidth = window.innerWidth;
+    const thresholdWidth = 1100; // Match the same threshold used in the resize function
+
     // Handle the functions panel and basic group independently
     if (tabName === 'functions') {
+        if (screenWidth < thresholdWidth && extraPanel.classList.contains('active')) {
+            extraPanel.classList.remove('active');
+            document.querySelector('button[onclick="switchTab(\'extrapanel\')"]').classList.remove('active');
+        }
         if (functionsGroup.classList.contains('active')) {
             functionsGroup.classList.remove('active');
             document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
@@ -226,7 +235,10 @@ function switchTab(tabName) {
         document.querySelector('button[onclick="switchTab(\'basic\')"]').classList.add('active');
         document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
     } else if (tabName === 'extrapanel') {
-        // Toggle the extra panel's visibility independently
+        if (screenWidth < thresholdWidth && functionsGroup.classList.contains('active')) {
+            functionsGroup.classList.remove('active');
+            document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
+        }
         extraPanel.classList.toggle('active');
         const askAvaButton = document.querySelector('button[onclick="switchTab(\'extrapanel\')"]');
         askAvaButton.classList.toggle('active');
@@ -243,7 +255,25 @@ function switchTab(tabName) {
     adjustCalculatorPosition(); // Adjust the calculator's position after toggling
 }
 
+// Call handleResize once on load to check the initial state
+window.addEventListener('load', handleResize);
 
+function handleResize() {
+    const screenWidth = window.innerWidth;
+
+    // Set the threshold width at which only one panel can be open at a time
+    const thresholdWidth = 1100; // You can adjust this value based on your needs
+
+    const functionsActive = functionsGroup.classList.contains('active');
+    const extraActive = extraPanel.classList.contains('active');
+
+    if (screenWidth < thresholdWidth && functionsActive && extraActive) {
+        // If both panels are open on a small screen, close one of them
+        functionsGroup.classList.remove('active');
+        document.querySelector('button[onclick="switchTab(\'functions\')"]').classList.remove('active');
+        adjustCalculatorPosition();
+    }
+}
 
 
 
