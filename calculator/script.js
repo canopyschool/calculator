@@ -263,7 +263,7 @@ function handleResize() {
     const screenWidth = window.innerWidth;
 
     // Set the threshold width for mobile devices
-    const mobileThresholdWidth = 768; // Threshold for mobile devices
+    const mobileThresholdWidth = 760; // Threshold for mobile devices
 
     const calculator = document.querySelector('.calculator');
     const mobileMessage = document.querySelector('.mobile-message');
@@ -364,4 +364,11 @@ function addMessageListener() {
     //console.log('Voiceflow chat is open and ready.');
 }
 
+window.addEventListener('resize', function() {
+    const iframe = window.frameElement;
+    if (iframe) {
+        const width = iframe.clientWidth;
+        // Adjust your calculator or content based on the iframe width
+    }
+});
 
