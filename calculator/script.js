@@ -213,7 +213,7 @@ window.addEventListener('resize', handleResize);
 
 function switchTab(tabName) {
     const screenWidth = window.innerWidth;
-    const thresholdWidth = 1300; // Match the same threshold used in the resize function
+    const thresholdWidth = 1400; // Match the same threshold used in the resize function
 
     // Handle the functions panel and basic group independently
     if (tabName === 'functions') {
