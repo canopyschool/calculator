@@ -38,7 +38,6 @@ body {
     width: 600px; /* Width when any panel is open */
 }
 
-
 #display {
     width: 100%;
     height: 50px;
@@ -253,6 +252,12 @@ button:active {
 }
 
 /* Responsive adjustments */
+@media (max-width: 1300px) {
+    button:hover {
+        opacity: 1; /* Disable hover effect */
+    }
+}
+
 @media (max-width: 768px) {
     .calculator {
         width: 100%;
@@ -264,29 +269,30 @@ button:active {
         left: 0;
         right: 0;
     }
-}
-.mobile-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff; /* White background for the message */
-    color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    z-index: 100; /* Ensure it appears above other elements */
-    width: 80%;
-    max-width: 300px;
-}
 
-.mobile-message-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #70b0f0, #6710f2, #70b0f0);
-    z-index: 99; /* Slightly lower z-index than the message to appear behind it */
+    .mobile-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff; /* White background for the message */
+        color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        z-index: 100; /* Ensure it appears above other elements */
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .mobile-message-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #70b0f0, #6710f2, #70b0f0);
+        z-index: 99; /* Slightly lower z-index than the message to appear behind it */
+    }
 }
