@@ -7,21 +7,17 @@ const extraPanel = document.getElementById('extrapanel'); // Reference to the ne
 let memoryValue = 0; // Memory value initialization
 
 buttons.forEach(button => {
-    // Handle both click and touchstart events
-    button.addEventListener('click', handleButtonEvent);
-    button.addEventListener('touchstart', handleButtonEvent);
+    button.addEventListener('click', (event) => {
+        const buttonText = button.textContent;
+
+        // Check if the clicked button is a tab button
+        if (button.classList.contains('tab-button')) {
+            return; // If it's a tab button, do nothing further in this event handler
+        }
+
+        handleInput(buttonText);
+    });
 });
-
-function handleButtonEvent(event) {
-    const buttonText = event.target.textContent;
-
-    // Check if the clicked/touched button is a tab button
-    if (event.target.classList.contains('tab-button')) {
-        return; // If it's a tab button, do nothing further in this event handler
-    }
-
-    handleInput(buttonText);
-}
 
 function handleInput(input) {
     if (input === '=' || input === 'Solve') {
