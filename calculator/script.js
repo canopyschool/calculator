@@ -371,4 +371,8 @@ window.addEventListener('resize', function() {
         // Adjust your calculator or content based on the iframe width
     }
 });
+window.addEventListener('resize', function() {
+    adjustCalculatorPosition();
+});
 
+    
